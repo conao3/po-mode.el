@@ -8,4 +8,4 @@
 This repository distribute ~po-mode.el~ for Emacs package manager.
 
 Those are bundled GNU gettext at ~gettext/0.19.8.1/share/emacs/site-lisp/gettext~
-and destributed under the GPLv3.
+and distributed under the GPLv3.
