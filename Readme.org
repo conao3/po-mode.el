@@ -1,7 +1,6 @@
 #+author: conao
 #+date: <2019-01-30 Wed>
 
-[[https://github.com/conao3/po-mode.el][https://img.shields.io/github/tag/conao3/po-mode.el.svg?style=flat-square]]
 [[https://github.com/conao3/po-mode.el][https://img.shields.io/github/license/conao3/po-mode.el.svg?style=flat-square]]
 [[https://github.com/conao3/github-header][https://files.conao3.com/github-header/gif/po-mode.el.gif]]
 
