@@ -1,17 +1,86 @@
-#+author: conao
-#+date: <2019-01-30 Wed>
+#+title: po-mode.el
+#+author: conao3
 
 [[https://github.com/conao3/po-mode.el][https://raw.githubusercontent.com/conao3/po-mode.el/master/blob/headers/png/po-mode.el.png]]
 [[https://github.com/conao3/po-mode.el/blob/master/LICENSE][https://img.shields.io/github/license/conao3/po-mode.el.svg?style=flat-square]]
 [[https://github.com/conao3/po-mode.el/releases][https://img.shields.io/github/tag/conao3/po-mode.el.svg?style=flat-square]]
-[[https://travis-ci.org/conao3/po-mode.el][https://img.shields.io/travis/conao3/po-mode.el/master.svg?style=flat-square]]
-[[https://app.codacy.com/project/conao3/po-mode.el/dashboard][https://img.shields.io/codacy/grade/03aff8c0aebd4ba98c11f7e9d0ad4135.svg?logo=codacy&style=flat-square]]
 [[https://www.patreon.com/conao3][https://img.shields.io/badge/patreon-become%20a%20patron-orange.svg?logo=patreon&style=flat-square]]
 [[https://twitter.com/conao_3][https://img.shields.io/badge/twitter-@conao__3-blue.svg?logo=twitter&style=flat-square]]
 [[https://join.slack.com/t/conao3-support/shared_invite/enQtNjUzMDMxODcyMjE1LTA4ZGRmOWYwZWE3NmE5NTkyZjk3M2JhYzU2ZmRkMzdiMDdlYTQ0ODMyM2ExOGY0OTkzMzZiMTNmZjJjY2I5NTM][https://img.shields.io/badge/chat-on_slack-blue.svg?logo=slack&style=flat-square]]
 
-* What is it?
-This repository distribute ~po-mode.el~ for Emacs package manager.
+* Overview
 
-Those are bundled GNU gettext at ~gettext/0.19.8.1/share/emacs/site-lisp/gettext~
-and distributed under the GPLv3.
+This repository provides ~po-mode.el~ packaged for modern Emacs package managers.
+
+~po-mode~ is a major mode for editing GNU gettext PO files, which are used for internationalization (i18n) and localization of software. It provides translators with a powerful editing environment specifically designed for working with translation files.
+
+The files included here are sourced from GNU gettext (version 0.19.8.1) and are distributed under the GPLv3 license.
+
+* Features
+
+- Dedicated major mode for PO file editing
+- Navigate between translated and untranslated entries
+- Edit msgstr entries with proper handling of special characters
+- Support for plural forms in translations
+- Automatic detection of file encoding
+- Integration with gettext toolchain
+
+* Installation
+
+** Using leaf (recommended)
+
+#+begin_src emacs-lisp
+(leaf po-mode
+  :ensure t
+  :mode ("\\.po\\'" . po-mode))
+#+end_src
+
+** Using use-package
+
+#+begin_src emacs-lisp
+(use-package po-mode
+  :ensure t
+  :mode ("\\.po\\'" . po-mode))
+#+end_src
+
+** Manual installation
+
+Add the following to your init file:
+
+#+begin_src emacs-lisp
+(autoload 'po-mode "po-mode"
+          "Major mode for translators to edit PO files" t)
+(setq auto-mode-alist (cons '("\\.po\\'\\|\\.po\\." . po-mode)
+                            auto-mode-alist))
+
+;; For automatic encoding detection
+(autoload 'po-find-file-coding-system "po-compat")
+(modify-coding-system-alist 'file "\\.po\\'\\|\\.po\\."
+                            'po-find-file-coding-system)
+#+end_src
+
+* Basic Usage
+
+When visiting a PO file, ~po-mode~ activates automatically. Key bindings include:
+
+| Key       | Description                              |
+|-----------+------------------------------------------|
+| =RET=     | Edit the current entry                   |
+| =n= / =p= | Move to next/previous entry              |
+| =u=       | Move to next untranslated entry          |
+| =f=       | Move to next fuzzy entry                 |
+| =k=       | Kill the current entry's translation     |
+| =w=       | Copy msgid to the kill ring              |
+| =V=       | Validate the PO file                     |
+| =?=       | Display help                             |
+
+* Related Resources
+
+- [[https://www.gnu.org/software/gettext/manual/gettext.html][GNU gettext manual]]
+- [[https://www.gnu.org/software/gettext/][GNU gettext project page]]
+
+* License
+
+This package is distributed under the GNU General Public License v3.0. See the [[file:LICENSE][LICENSE]] file for details.
+
+The original ~po-mode.el~ was written by Francois Pinard and Greg McGary as part of the GNU gettext project.
